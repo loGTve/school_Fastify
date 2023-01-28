@@ -1,0 +1,23 @@
+{
+  "compilerOptions": {
+      "module": "commonjs",
+      "target": "es6",
+      "sourceMap": true,
+      "esModuleInterop": true,
+      "declaration": true,
+      "noImplicitAny": true,
+      "skipLibCheck": true,
+      "moduleResolution": "Node",
+      "allowSyntheticDefaultImports": true,
+      "experimentalDecorators": true,
+      "rootDir": "./",
+      "allowJs": true,
+      "resolveJsonModule": true,
+      "strictPropertyInitialization": false
+  },
+  "exclude": [
+      "env",
+      "node_modules",
+      "public"
+  ]
+}
