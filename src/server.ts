@@ -2,7 +2,10 @@ import dotenv from 'dotenv';
 import * as path from 'path';
 import Fastify from 'fastify';
 import _ from 'lodash';
-
+import FastifyMiddleware from './middleware';
+import FastifyHooks from './hooks';
+import FastifyContentTypeParser from './parser';
+import FastifyRotuer from './routes';
 
 const envFilePath = process.env.NODE_ENV === 'production'
     ? path.join(__dirname, '../env/.env.production')
@@ -12,17 +15,26 @@ dotenv.config({
     path: envFilePath
 });
 
-const fastify = Fastify({
+const fastity = Fastify({
     logger: Boolean(process.env.FASTIFY_LOGGING || true)
 });
 
-fastify.listen({
+fastity.register(FastifyMiddleware);
+
+fastity.register(FastifyContentTypeParser);
+
+fastity.register(FastifyHooks);
+
+fastity.register(FastifyRotuer);
+
+fastity.listen({
     port: _.toNumber(process.env.SERVER_PORT || 9000),
     host: '0.0.0.0'
 }, (err, addr) => {
     if (err) {
-        fastify.log.error(err);
+        fastity.log.error(err);
         process.exit(1);
     }
-    console.info(`Server Listening at ${addr}`);
+
+    console.info(`server listening at ${addr} 🐱`);
 });

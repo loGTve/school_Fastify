@@ -5,4 +5,4 @@ export interface IAuthWithJwtHeader {
 export type QueryType = {
     text: string,
     values: any[]
-}
+} 
