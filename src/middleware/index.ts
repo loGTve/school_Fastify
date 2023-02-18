@@ -8,9 +8,9 @@ import AuthenticationMiddleware from "./authentication";
 import ErrorHandlerMiddleware from "./handle";
 
 const FastifyMiddleware = async (
-        fastify: FastifyInstance,
-        opts: FastifyPluginOptions
-        ) => {
+    fastify: FastifyInstance,
+    opts: FastifyPluginOptions
+) => {
     fastify.register(fastifyStatic, {
         root: path.join(__dirname, '../../public')
     });

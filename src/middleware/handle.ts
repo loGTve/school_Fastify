@@ -3,14 +3,14 @@ import fastifyPlugin from "fastify-plugin";
 import { FastifyErrorResponseType } from "../utils/error";
 
 const ErrorHandlerMiddleware = async (
-        fastify: FastifyInstance,
-        opts: FastifyPluginOptions
-        ) => {
+    fastify: FastifyInstance,
+    opts: FastifyPluginOptions
+) => {
     fastify.setErrorHandler((
-            error: FastifyError,
-            request: FastifyRequest,
-            reply: FastifyReply
-            ) => {
+        error: FastifyError,
+        request: FastifyRequest,
+        reply: FastifyReply
+    ) => {
         console.error(error);
 
         const response: FastifyErrorResponseType = {
@@ -25,9 +25,9 @@ const ErrorHandlerMiddleware = async (
     });
 
     fastify.setNotFoundHandler((
-            request: FastifyRequest,
-            reply: FastifyReply
-            ) => {
+        request: FastifyRequest,
+        reply: FastifyReply
+        ) => {
         reply
             .status(404)
             .type('text/html')

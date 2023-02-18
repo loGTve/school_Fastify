@@ -1,10 +1,10 @@
 import { FastifyRequest, FastifyReply, FastifyInstance } from "fastify";
 
 const healthCheckService = async (
-        request: FastifyRequest,
-        reply: FastifyReply,
-        fastify: FastifyInstance
-        ) => {
+    request: FastifyRequest,
+    reply: FastifyReply,
+    fastify: FastifyInstance
+) => {
     const response = {
         'serverStatus': 'ok'
     };

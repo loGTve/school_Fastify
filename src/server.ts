@@ -5,7 +5,7 @@ import _ from 'lodash';
 import FastifyMiddleware from './middleware';
 import FastifyHooks from './hooks';
 import FastifyContentTypeParser from './parser';
-import FastifyRotuer from './routes';
+import FastifyRouter from './routes';
 
 const envFilePath = process.env.NODE_ENV === 'production'
     ? path.join(__dirname, '../env/.env.production')
@@ -25,7 +25,7 @@ fastity.register(FastifyContentTypeParser);
 
 fastity.register(FastifyHooks);
 
-fastity.register(FastifyRotuer);
+fastity.register(FastifyRouter);
 
 fastity.listen({
     port: _.toNumber(process.env.SERVER_PORT || 9000),
@@ -36,5 +36,5 @@ fastity.listen({
         process.exit(1);
     }
 
-    console.info(`server listening at ${addr} 🐱`);
+    console.info(`server listening at ${addr}`);
 });

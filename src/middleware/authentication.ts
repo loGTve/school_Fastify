@@ -3,13 +3,13 @@ import {
     FastifyPluginOptions,
     FastifyReply,
     FastifyRequest
-} from 'fastify';
-import fastifyPlugin from 'fastify-plugin';
-import fastifyJwt from '@fastify/jwt';
-import { IAuthWithJwtHeader } from '../utils/types';
-import { fastifyErrorWrapper } from '../utils/error';
+} from "fastify";
+import fastifyPlugin from "fastify-plugin";
+import fastifyJwt from "@fastify/jwt";
+import { IAuthWithJwtHeader } from "../utils/types";
+import { fastifyErrorWrapper } from "../utils/error";
 
-declare module '@fastify/jwt' {
+declare module "@fastify/jwt" {
     interface FastifyJWT {
         payload: JwtSignaturePayload,
         user: JwtSignatureUser
@@ -26,9 +26,9 @@ export type JwtSignatureUser = JwtSignaturePayload & {
 }
 
 const authenticationWithJwt = async (
-        request: FastifyRequest<{ Headers: IAuthWithJwtHeader }>,
-        reply: FastifyReply,
-        fastify: FastifyInstance
+    request: FastifyRequest<{ Headers: IAuthWithJwtHeader }>,
+    reply: FastifyReply,
+    fastify: FastifyInstance
 ) => {
     try {
         await request.jwtVerify();
@@ -39,14 +39,15 @@ const authenticationWithJwt = async (
             .type('application/json')
             .send(fastifyErrorWrapper(401, "API_ACCESS_TOKEN_IS_INVALID_OR_EXPIRED"));
     }
-
 };
 
 const AuthenticationMiddleware = async (
-        fastify: FastifyInstance,
-        opts: FastifyPluginOptions
+    fastify: FastifyInstance,
+    opts: FastifyPluginOptions
 ) => {
     fastify.register(fastifyJwt, {
         secret: process.env.FASTIFY_AUTH_JWT_SECRET
     });
-}
+};
+
+export default fastifyPlugin(AuthenticationMiddleware);

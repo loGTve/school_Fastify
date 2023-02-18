@@ -3,9 +3,9 @@ import healthCheckService from "./service/healthCheck";
 import indexPageService from "./service/indexPage";
 
 const RootRouter = async (
-        fastify: FastifyInstance,
-        opts: FastifyServerOptions
-        ) => {
+    fastify: FastifyInstance,
+    opts: FastifyServerOptions
+) => {
     // Index Page
     fastify.get(
             '/',
@@ -18,3 +18,5 @@ const RootRouter = async (
             (request, reply) => healthCheckService(request, reply, fastify)
             );
 }
+
+export default RootRouter;
