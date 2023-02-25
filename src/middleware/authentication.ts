@@ -25,11 +25,11 @@ export type JwtSignatureUser = JwtSignaturePayload & {
     exp: number;
 }
 
-const authenticationWithJwt = async (
-    request: FastifyRequest<{ Headers: IAuthWithJwtHeader }>,
-    reply: FastifyReply,
-    fastify: FastifyInstance
-) => {
+export const authenticationWithJwt = async (
+        request: FastifyRequest<{ Headers: IAuthWithJwtHeader }>,
+        reply: FastifyReply,
+        fastify: FastifyInstance
+        ) => {
     try {
         await request.jwtVerify();
     } catch (error) {
@@ -42,9 +42,9 @@ const authenticationWithJwt = async (
 };
 
 const AuthenticationMiddleware = async (
-    fastify: FastifyInstance,
-    opts: FastifyPluginOptions
-) => {
+        fastify: FastifyInstance,
+        opts: FastifyPluginOptions
+        ) => {
     fastify.register(fastifyJwt, {
         secret: process.env.FASTIFY_AUTH_JWT_SECRET
     });
